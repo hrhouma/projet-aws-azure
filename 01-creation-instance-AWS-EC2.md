@@ -1,4 +1,7 @@
+🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇
 # Script shell pour créer une instance AWS EC2 avec Amazon Linux 2023. 
+🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇
+
 - Ce script effectue toutes les étapes nécessaires, de la configuration du groupe de sécurité à l'attribution de la paire de clés et au lancement de l'instance.
 
 ```sh
@@ -184,7 +187,9 @@ Pour exécuter ce script :
 Assurez-vous que l'AWS CLI est configurée correctement avec vos identifiants AWS avant d'exécuter ce script. Remplacez la région par la vôtre si nécessaire.
 
 
+🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇
 # Annexe : Guide d'utilisation
+🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇🥇
 
 
 ## Guide d'utilisation du script de création d'une instance EC2 sur AWS
