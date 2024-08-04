@@ -1,3 +1,7 @@
+# https://www.youtube.com/watch?v=bweJ3TZ5ynI&ab_channel=cocadmin
+# https://medium.com/@salmanalicloud/aws-academy-student-building-a-highly-available-scalable-web-application-582a9085a46a
+# https://aws.amazon.com/fr/tutorials/launch-load-balanced-wordpress-website/
+
 # Application Web Hautement Disponible et Évolutive
 
 - Ce projet nécessite une compréhension des services principaux d'AWS, tels que les services de calcul, de stockage, de réseau et de base de données.
