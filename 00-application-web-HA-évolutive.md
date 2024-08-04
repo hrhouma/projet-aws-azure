@@ -7,6 +7,33 @@
 - La connaissance de n'importe quel langage de programmation, tel que Python ou JavaScript, est un avantage, mais n'est pas obligatoire.
 - Votre scénario consiste à planifier, concevoir, construire et déployer l'application web sur le Cloud AWS d'une manière conforme aux meilleures pratiques du cadre AWS Well-Architected. Pendant la période de pointe des admissions, l'application doit prendre en charge des milliers d'utilisateurs et être hautement disponible, évolutive, équilibrée en charge, sécurisée et performante.
 
+
+# Résumé de toutes les étapes dans un tableau :
+
+| Étape | Description | Détails |
+|-------|-------------|---------|
+| 1 | **Créer un schéma architectural** | Utiliser des outils comme Lucidchart pour dessiner le schéma. |
+| 2 | **Estimer les coûts** | Utiliser l'AWS Pricing Calculator pour estimer les coûts sur 12 mois. |
+| 3 | **Créer un VPC** | Créer un VPC avec un bloc CIDR de `10.0.0.0/16`. |
+| 4 | **Créer des sous-réseaux** | Créer des sous-réseaux publics et privés avec des blocs CIDR différents (par ex., `10.0.1.0/24` pour Public Subnet 1 et `10.0.2.0/24` pour Public Subnet 2). |
+| 5 | **Créer une passerelle Internet** | Créer et attacher une passerelle Internet au VPC. |
+| 6 | **Configurer une table de routage publique** | Ajouter une route vers `0.0.0.0/0` avec la passerelle Internet comme cible. Associer les sous-réseaux publics. |
+| 7 | **Configurer des tables de routage privées** | Créer une table de routage privée et associer les sous-réseaux privés sans attribuer d'IPv4 publique. |
+| 8 | **Créer une instance EC2** | Lancer une instance Ubuntu, configurer les paramètres réseau, créer un groupe de sécurité, et ajouter des règles pour HTTP et MySQL. Utiliser un script de données utilisateur pour installer l'application. |
+| 9 | **Tester l'application web** | Accéder à l'application via l'adresse IPv4 publique et effectuer des tâches comme ajouter, modifier, supprimer des enregistrements. |
+| 10 | **Créer une base de données Amazon RDS** | Créer un groupe de sécurité pour RDS, configurer RDS avec MySQL, et utiliser le gestionnaire de secrets AWS pour les identifiants. |
+| 11 | **Migrer les données vers RDS** | Utiliser `mysqldump` pour exporter les données de l'instance EC2 vers RDS. |
+| 12 | **Configurer un Application Load Balancer (ALB)** | Créer un ALB, configurer les écouteurs, et ajouter les instances EC2 au groupe cible. |
+| 13 | **Créer un groupe Auto Scaling** | Créer un modèle de lancement, configurer le groupe Auto Scaling pour utiliser l'ALB et définir les politiques de mise à l'échelle. |
+| 14 | **Test de charge de l'application** | Utiliser des scripts de test de charge pour vérifier la mise à l'échelle automatique et les performances de l'application. |
+
+### Remarques importantes :
+- **Affectation automatique d'IP publiques :** Activer l'attribution automatique pour les sous-réseaux publics.
+- **Groupe de sécurité :** Configurer les groupes de sécurité pour permettre les connexions nécessaires.
+- **Surveillance et gestion des coûts :** Surveiller les coûts et utiliser les crédits AWS disponibles.
+
+En suivant ces étapes, vous pouvez créer et déployer une application web hautement disponible et évolutive sur AWS.
+
 # Étapes
 
 1. Créez un diagramme architectural pour illustrer les différents services AWS et leurs interactions entre eux.
