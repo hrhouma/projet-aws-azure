@@ -489,6 +489,8 @@ Il existe plusieurs moyens pour voir et créer des diagrammes d'architecture AWS
 ### **1. AWS Workload Discovery**
 AWS propose un outil appelé Workload Discovery sur AWS, qui permet de créer, personnaliser et partager des diagrammes d'architecture détaillés basés sur les données en direct d'AWS. Cet outil simplifie le processus de documentation en fournissant des données et des outils de visualisation au même endroit[7].
 
+- https://aws.amazon.com/fr/blogs/mt/visualizing-resources-with-workload-discovery-on-aws/
+- 
 ### **2. EdrawMax**
 EdrawMax est un logiciel qui offre une plateforme de dessin simple avec des fonctionnalités de glisser-déposer. Il inclut toutes les icônes AWS nécessaires pour créer des diagrammes précis et professionnels. Il est particulièrement utile pour les administrateurs système et les professionnels du réseau[4].
 
