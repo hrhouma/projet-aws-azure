@@ -521,12 +521,20 @@ En utilisant ces outils et en suivant les meilleures pratiques, vous pouvez cré
 # Citations:
 
 [1] https://www.edrawsoft.com/fr/article/aws-architecture-diagram.html 
+
 [2] https://aws.amazon.com/fr/architecture/ 
+
 [3] https://miro.com/fr/modeles/diagramme-architecture-aws/ 
+
 [4] https://www.edrawsoft.com/fr/aws-diagram-software.html 
+
 [5] https://www.reddit.com/r/aws/comments/16hxlub/creating_aws_architecture_diagram/?tl=fr 
+
 [6] https://online.visual-paradigm.com/fr/diagrams/features/aws-architecture-diagram-tool/ 
+
 [7] https://aws.amazon.com/fr/what-is/architecture-diagramming/ 
+
 [8] https://www.reddit.com/r/aws/comments/y18dhi/aws_architecture_diagram_tool_recommendations/?tl=fr 
+
 
 
