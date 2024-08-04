@@ -443,7 +443,7 @@ La première étape consiste à créer un groupe de sécurité qui sera associé
 
 ![image](https://github.com/user-attachments/assets/2d120b2c-ee90-47bc-bfc3-82377d885759)
 
- ![image](https://github.com/user-attachments/assets/f83e1748-9824-4896-ab9b-6307eb22fdd0)
+
 
 Je suis arrivé ici :     Login to your AWS account and navigate to the Amazon RDS console.
 2. Click on “Create database” to start the RDS creation process.
