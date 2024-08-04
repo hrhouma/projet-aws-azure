@@ -120,6 +120,118 @@ Un Virtual Private Cloud (VPC) est un réseau virtuel sur le cloud qui vous perm
    
 3. Cliquez sur "Créer un VPC".
 
+![image](https://github.com/user-attachments/assets/2c1bade1-e21b-4001-8c21-cbb7a81e03e2)
+
+# Explication du VPC 
+
+Le bloc CIDR VPC dans AWS est un élément crucial pour définir la plage d'adresses IP de votre VPC. Il détermine le nombre d'adresses IP disponibles pour vos ressources et sous-réseaux. Lors du choix d'un bloc CIDR, vous devez prendre en compte la taille, le chevauchement potentiel, les besoins en échelle et les exigences de sous-réseautage de votre VPC.
+
+La notation “10.0.0.0/16” représente un bloc d'adresses IP allant de 10.0.0.0 à 10.0.255.255. Le “/16” indique le masque de sous-réseau, ce qui signifie que les 16 premiers bits de l'adresse IP sont fixes et que les 16 bits restants peuvent être utilisés pour assigner des adresses spécifiques au sein de cette plage. Cela permet d'avoir un total de 65 536 adresses IP possibles dans le sous-réseau 10.0.0.0/16.
+
+En revanche, “10.0.0.0/24” représente un bloc plus petit d'adresses IP allant de 10.0.0.0 à 10.0.0.255. Le masque de sous-réseau “/24” signifie que les 24 premiers bits sont fixes, ne laissant que 8 bits disponibles pour l'adressage. Cela donne un total de 256 adresses IP possibles dans le sous-réseau 10.0.0.0/24.
+
+
+# Informations Importantes sur le VPC
+
+Le VPC réserve 5 adresses IP, donc vous devez toujours soustraire ces adresses du total d'adresses IP disponibles. Par exemple, pour un bloc de 256 adresses IP, soustrayez 5 adresses, ce qui vous donne 251 adresses IP disponibles.
+
+**Remarque :** Ajoutez plus d'adresses IP pour les ressources privées que pour les ressources publiques.
+
+### Paramètres IPv4 et IPv6
+
+- L'IPv4 est toujours activé par défaut. Vous pouvez activer IPv6, mais vous ne pouvez pas supprimer IPv4.
+
+### Mise à Jour des Paramètres du VPC
+
+1. **Choisissez Actions > Modifier les paramètres du VPC.**
+2. **Dans la section des paramètres DNS, sélectionnez Activer les noms d'hôtes DNS.**
+3. **Cliquez sur Enregistrer.**
+
+![image](https://github.com/user-attachments/assets/75d89fc1-02d2-43ae-bb11-953ea17e832d)
+
+![image](https://github.com/user-attachments/assets/092adcd7-06db-4fe8-a119-17ea40b42847)
+
+
+### Création des Composants d'un VPC
+
+Un VPC se compose des éléments suivants :
+
+1. **Sous-réseaux :** Les sous-réseaux sont des subdivisions de la plage d'adresses IP d'un VPC. Ils vous permettent d'isoler logiquement les ressources au sein de votre VPC et de contrôler leur accès. Vous pouvez configurer des tables de routage au niveau du sous-réseau pour contrôler le flux de trafic.
+
+2. **Passerelle Internet :** Une passerelle Internet (IGW) est un composant horizontalement évolutif et redondant qui fournit une connexion entre votre VPC et l'Internet. Elle permet aux ressources de votre VPC de communiquer avec Internet et vice versa.
+
+3. **Tables de routage :** Les tables de routage définissent les règles de routage du trafic au sein de votre VPC. Chaque sous-réseau est associé à une table de routage, qui détermine comment le trafic est dirigé entre les sous-réseaux, l'Internet et d'autres réseaux connectés.
+
+### Configuration d'une Passerelle Internet
+
+1. Dans le volet de navigation, choisissez **Passerelles Internet**.
+2. Configurez les éléments suivants :
+   - **Choisissez : Créer une passerelle Internet**
+   - **Tag de nom :** NomPourVotreIGW
+   - **Choisissez : Créer une passerelle Internet**
+
+![image](https://github.com/user-attachments/assets/11d547ee-688f-4098-801b-200ace0043ad)
+
+### Passerelle Internet
+
+Une passerelle Internet (IGW) est un composant horizontalement évolutif et redondant qui fournit une connexion entre votre VPC et l'Internet. Elle permet aux ressources de votre VPC de communiquer avec Internet et vice versa.
+
+### Attacher la Passerelle Internet au VPC
+
+1. **Choisissez Actions > Attacher au VPC.**
+2. **VPC disponibles :** Choisissez le VPC que nous avons créé.
+3. **Choisissez Attacher la passerelle Internet.**
+
+![image](https://github.com/user-attachments/assets/902ddf7d-81f5-44cf-a69a-bca5bdccbfa0)
+
+![image](https://github.com/user-attachments/assets/a5c20443-a8e4-4de7-8e54-b69ac1c87dd4)
+
+### Création d'un Sous-réseau
+
+1. Dans le volet de navigation, choisissez **Sous-réseaux** et configurez les éléments suivants :
+   - **Choisissez : Créer un sous-réseau**
+   - **ID du VPC :** Choisissez le VPC que nous avons créé
+   - **Nom du sous-réseau :** Entrez `Public Subnet 1`
+   - **Zone de disponibilité :** Choisissez la première zone de disponibilité dans la liste déroulante
+   - **Bloc CIDR du VPC IPv4 :** Entrez `10.0.0.0/16`
+   - **Bloc CIDR du sous-réseau IPv4 :** Entrez `10.0.1.0/24`
+   - **Choisissez : Créer un sous-réseau**
+
+![image](https://github.com/user-attachments/assets/b8ed5ac5-4e48-44fc-863b-60fac4273790)
+
+### Sous-réseaux
+
+Les sous-réseaux sont des subdivisions de la plage d'adresses IP d'un VPC. Ils vous permettent d'isoler logiquement les ressources au sein de votre VPC et de contrôler leur accès. Vous pouvez configurer des tables de routage au niveau du sous-réseau pour contrôler le flux de trafic.
+
+### Création d'un Deuxième Sous-réseau
+
+Créez un autre sous-réseau en vous assurant que le bloc CIDR du sous-réseau IPv4 est différent et ne se chevauche pas :
+
+1. Dans le volet de navigation, choisissez **Sous-réseaux** et configurez les éléments suivants :
+   - **Choisissez : Créer un sous-réseau**
+   - **ID du VPC :** Choisissez le VPC que nous avons créé
+   - **Nom du sous-réseau :** Entrez `Public Subnet 2`
+   - **Zone de disponibilité :** Choisissez une autre zone de disponibilité dans la liste déroulante pour garantir une haute disponibilité
+   - **Bloc CIDR du VPC IPv4 :** Entrez `10.0.0.0/16`
+   - **Bloc CIDR du sous-réseau IPv4 :** Entrez `10.0.2.0/24`
+   - **Choisissez : Créer un sous-réseau**
+
+### Activer l'Attribution Automatique d'IP Publiques
+
+Nous devons attribuer automatiquement des adresses IPv4 publiques, car l'adresse IP publique n'est pas activée par défaut. Vous devez donc activer l'attribution automatique d'IP publiques :
+
+1. Sélectionnez le sous-réseau que vous venez de créer.
+2. Choisissez **Actions > Modifier les paramètres de l'attribution automatique d'IP**.
+3. Cochez la case **Activer l'attribution automatique d'IP publiques**.
+4. Cliquez sur **Enregistrer**.
+
+![image](https://github.com/user-attachments/assets/d0d774a2-09b5-4bd6-bd11-7ca146415625)
+
+
+
+
+
+
 
 
 
