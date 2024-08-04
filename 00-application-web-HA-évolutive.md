@@ -227,6 +227,84 @@ Nous devons attribuer automatiquement des adresses IPv4 publiques, car l'adresse
 
 ![image](https://github.com/user-attachments/assets/d0d774a2-09b5-4bd6-bd11-7ca146415625)
 
+![image](https://github.com/user-attachments/assets/94072f4d-eb43-48cd-9454-9428f50aee28)
+
+
+### Activation de l'Attribution Automatique d'IP
+
+Assurez-vous d'activer le paramètre d'attribution automatique d'IP, ce qui permet l'allocation automatique d'adresses IPv4 aux instances lancées dans le sous-réseau public. Cela signifie que chaque fois que vous lancez une nouvelle instance dans le sous-réseau, elle se verra automatiquement attribuer une adresse IPv4 publique unique. Cela élimine le besoin de configuration manuelle et garantit que chaque instance dispose d'une adresse distincte pour les communications.
+
+Fait amusant : Lorsque vous arrêtez et redémarrez votre instance, l'adresse IP publique change, mais l'adresse IP privée reste la même.
+
+### Table de Routage
+
+Donnez à votre table de routage le nom `PublicRouteTable` et sélectionnez le VPC que nous avons créé.
+
+![image](https://github.com/user-attachments/assets/19e24357-4865-4d3d-a1df-4cfc7fc45201)
+
+Cliquez sur le bouton "Créer" pour terminer le processus.
+
+Une table de routage publique dans AWS est une ressource réseau qui contrôle le flux de trafic entre les sous-réseaux au sein d'un cloud privé virtuel (VPC) et l'internet. Elle contient un ensemble de règles, appelées routes, qui déterminent comment le trafic est dirigé. Dans cette section, nous explorerons les caractéristiques clés et les composants d'une table de routage publique AWS.
+
+1. Route → Modifier les routes → (destination `0.0.0.0/0` signifie n'importe où) (cible : passerelle Internet)
+
+![image](https://github.com/user-attachments/assets/259ea0a2-9aec-4c86-8ec6-0655be411ce3)
+
+![image](https://github.com/user-attachments/assets/e177dc21-c360-47fc-a82a-cf60e3555ff4)
+
+En ce qui concerne le routage du trafic, les tables de routage publiques AWS fonctionnent de manière similaire aux tables de routage traditionnelles. Elles utilisent un modèle de routage basé sur la destination, où chaque route dans la table spécifie un bloc CIDR de destination et une cible. La cible peut être une passerelle Internet, un sous-réseau ayant une attribution automatique d'IPv4 publique.
+
+Nous devons maintenant modifier les associations de sous-réseaux explicites (attacher le sous-réseau à notre table de routage).
+
+1. **Route → Modifier les routes** : 
+   - **Destination** : `0.0.0.0/0` (signifie n'importe où)
+   - **Cible** : Passerelle Internet (Internet Gateway)
+
+2. **Modifier les associations de sous-réseaux** :
+   - Attachez le sous-réseau à notre table de routage nouvellement créée.
+
+![image](https://github.com/user-attachments/assets/89a52c55-1b8d-47bf-aa01-af056d8ce8f7)
+
+![image](https://github.com/user-attachments/assets/4f92b9c0-8901-4225-8279-219d2e00eb2e)
+
+### Associations Explicites de Sous-réseaux
+
+1. **Modifier les associations de sous-réseaux.**
+
+2. **Sélectionner et ajouter un sous-réseau public** pour l'attacher à la table de routage.
+
+
+![image](https://github.com/user-attachments/assets/2ccd2126-c831-4b46-b013-810c799c18c4)
+
+Une fois que vous avez créé une table de routage publique, vous pouvez configurer ses routes et l'associer à des sous-réseaux au sein de votre VPC. En associant un sous-réseau à une table de routage, vous permettez aux sous-réseaux d'utiliser les routes définies dans la table pour le routage du trafic.
+
+Il est important de noter qu'un VPC peut avoir plusieurs tables de routage, mais chaque sous-réseau ne peut être associé qu'à une seule table de routage à la fois. Cela vous permet d'avoir des configurations de routage différentes pour différents sous-réseaux au sein de votre VPC.
+
+
+### Création d'un Sous-réseau Privé Associé à une Table de Routage Privée
+
+1. Suivez la même procédure que pour la création d'un sous-réseau public, mais pour le sous-réseau privé.
+   
+2. Assurez-vous que le bloc CIDR soit différent ainsi que la zone de disponibilité. Exemple :
+   - **Sous-réseau privé 1** : `10.0.3.0/24`, AZ `1a`
+   - **Sous-réseau privé 2** : `10.0.4.0/24`, AZ `1b`
+
+**Remarque importante :** Pas besoin d'attribuer automatiquement des adresses IPv4 publiques, car il s'agit d'un sous-réseau privé et il n'est donc pas nécessaire d'avoir une adresse IPv4 publique.
+
+### Création d'une Table de Routage Privée
+
+1. Dans le tableau de bord Amazon VPC, cliquez sur **Tables de routage** dans le volet de navigation à gauche.
+
+![image](https://github.com/user-attachments/assets/b1d3c2f7-2b79-455e-b505-662a635b0113)
+
+
+
+
+
+
+
+
+
 
 
 
