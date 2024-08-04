@@ -338,24 +338,29 @@ Dans le champ **Destination**, entrez le bloc CIDR pour le trafic réseau que vo
 
 ### Création d'une instance EC2 pour notre application web
 
-1. Cliquez sur **"Launch Instance"** pour démarrer le processus de création d'instance.
+3. Cliquez sur **"Launch Instance"** pour démarrer le processus de création d'instance.
 
 ![image](https://github.com/user-attachments/assets/4fd1249d-b80b-4784-bd0e-1b50adf7f422)
 
-2. Dans la section **Application and OS Images**, sous **Quick Start**, choisissez **Ubuntu**.
+4. Dans la section **Application and OS Images**, sous **Quick Start**, choisissez **Ubuntu**.
+
 
 ![image](https://github.com/user-attachments/assets/64834f85-9c9f-4d14-bf32-231d0299b834)
 
-3. Sélectionnez le type d'instance souhaité et cliquez sur **"Next: Configure Instance Details"**. Utilisez `t2.micro` pour le niveau gratuit (juste pour la preuve de concept, pour un site de production, le type d'instance sera augmenté en fonction des spécifications des besoins de l'entreprise).
-4. Dans la section **Key pair**, pour **Key pair name**, choisissez `vockey`.
-5. Dans la section **Network settings**, configurez les éléments suivants :
+5. Sélectionnez le type d'instance souhaité et cliquez sur **"Next: Configure Instance Details"**. Utilisez `t2.micro` pour le niveau gratuit (juste pour la preuve de concept, pour un site de production, le type d'instance sera augmenté en fonction des spécifications des besoins de l'entreprise).
+   
+6. Dans la section **Key pair**, pour **Key pair name**, choisissez `vockey`.  
+![image](https://github.com/user-attachments/assets/4cb42f8e-b802-4a89-b737-c6820d207279)
+
+
+7. Dans la section **Network settings**, configurez les éléments suivants :
    - Choisissez **Edit**.
    - **VPC** : Choisissez le VPC que nous avons créé.
    - **Auto-assign public IP** : Choisissez **Enable**.
    
    **Remarque :** Cela permet à l'instance d'avoir une adresse IP publique attribuée automatiquement. Cela permettra à l'instance de communiquer sur Internet.
 
-6. **Firewall (security groups)** : Choisissez **Create security group**.
+8. **Firewall (security groups)** : Choisissez **Create security group**.
    - **Nom du groupe de sécurité** : Entrez le nom du groupe de sécurité souhaité.
    - Choisissez **Add security group rule**.
    - Gardez la règle SSH existante et ajoutez deux nouvelles règles avec les paramètres suivants :
@@ -363,10 +368,13 @@ Dans le champ **Destination**, entrez le bloc CIDR pour le trafic réseau que vo
        **Remarque :** Cette règle permet le trafic depuis un navigateur web.
      - **Nouvelle règle 2** : Pour **Type**, choisissez **MYSQL/Aurora**. Pour **Source**, entrez `10.0.0.0/16`.
        **Remarque :** Cette règle permet d'exporter des données depuis la base de données lors d'une tâche ultérieure.
+![image](https://github.com/user-attachments/assets/ba0e581b-e498-43c1-9398-91d4ab5897e2)
+![image](https://github.com/user-attachments/assets/ad8deb02-68a6-437f-bf1f-56607b6d8ad8)
 
-7. Dans la page **Advanced details**, vous pouvez également spécifier un profil d'instance IAM si vous souhaitez que l'instance communique avec AWS Secrets Manager ou tout autre service AWS. Cela permet à l'instance d'avoir les autorisations nécessaires pour accéder aux secrets de manière sécurisée.
+9. Dans la page **Advanced details**, vous pouvez également spécifier un profil d'instance IAM si vous souhaitez que l'instance communique avec AWS Secrets Manager ou tout autre service AWS. Cela permet à l'instance d'avoir les autorisations nécessaires pour accéder aux secrets de manière sécurisée.
+![image](https://github.com/user-attachments/assets/f511b723-4f91-4bb5-8399-8f8865dc3f26)
 
-8. Enfin, vous pouvez fournir des **données utilisateur** sur la page **Configure Instance Details**. Les données utilisateur sont un script qui s'exécute sur l'instance pendant le processus de démarrage. Vous pouvez spécifier les étapes nécessaires à effectuer après le lancement de l'instance.
+10. Enfin, vous pouvez fournir des **données utilisateur** sur la page **Configure Instance Details**. Les données utilisateur sont un script qui s'exécute sur l'instance pendant le processus de démarrage. Vous pouvez spécifier les étapes nécessaires à effectuer après le lancement de l'instance.
 
 ```bash
 #!/bin/bash -xe
@@ -396,14 +404,50 @@ chmod +x /etc/rc.local
 **Important :** Avant de passer à la tâche suivante, confirmez que l'instance est en état **Running** et que la colonne **Status check** indique "2/2 checks passed." Cela prendra quelques minutes.
 
 
+### Pendant la session :
+
+- Ont-ils préparé l'estimation des coûts ?
+- Ont-ils créé le diagramme architectural ?
+- Ont-ils préparé la présentation de la solution proposée ?
+- Ont-ils créé une application web fonctionnelle sur une instance Amazon Elastic Compute Cloud (Amazon EC2) ?
+
+### Tester l'application web
+
+Pour tester l'application web, accédez-y depuis Internet en utilisant l'adresse IPv4 publique ou le DNS IPv4 public de l'instance.
+
+**Remarque :** Assurez-vous d'utiliser **http** (au lieu de **https**) lors de l'accès à l'application web depuis le navigateur.
+
+Effectuez quelques tâches, telles que l'ajout de nouveaux enregistrements d'étudiants, la modification d'enregistrements et la suppression d'enregistrements. Gardez ces données pour les migrer vers une nouvelle base de données lors d'une tâche ultérieure. Vous avez maintenant un site web fonctionnel qui fonctionne sur une instance EC2.
+
+### Prochaines étapes
+
+Les composants existent sur une seule machine virtuelle, ce qui n'est pas flexible et difficile à mettre à l'échelle. Dans la prochaine phase, les étudiants vont séparer les différentes couches. La conception architecturale créée jusqu'à présent a été rapide à construire, avec peu de composants et un faible coût. Cette approche serait adaptée pour une preuve de concept (POC).
+
+### Création d'une base de données relationnelle (RDS)
+
+La première étape consiste à créer un groupe de sécurité qui sera associé à la RDS pour ouvrir les ports nécessaires à la connexion au serveur web EC2.
+
+### Créer un groupe de sécurité pour la base de données
+
+1. En haut de la console de gestion AWS, dans la barre de recherche, recherchez et sélectionnez **VPC**.
+2. Dans le volet de navigation, choisissez **Groupes de sécurité**.
+3. Choisissez **Créer un groupe de sécurité**, et configurez les éléments suivants :
+   - **Nom du groupe de sécurité :** Entrez `YournameDBSG`.
+   - **Description :** Entrez `Groupe de sécurité pour la base de données`.
+   - **VPC :** Commencez à entrer le VPC que nous avons créé et choisissez-le lorsqu'il apparaît.
+4. Dans la section **Règles entrantes**, choisissez **Ajouter une règle** et configurez les éléments suivants :
+   - **Type :** Choisissez `MYSQL/Aurora`.
+   - **Source :** Entrez `10.0.0.0/16` dans le champ à droite de **Personnalisé**.
+5. Choisissez **Créer un groupe de sécurité**.
 
 
+![image](https://github.com/user-attachments/assets/2d120b2c-ee90-47bc-bfc3-82377d885759)
 
 
-
-
-
-
+Je suis arrivé ici :     Login to your AWS account and navigate to the Amazon RDS console.
+2. Click on “Create database” to start the RDS creation process.
+# Références : 
+- https://medium.com/@salmanalicloud/aws-academy-student-building-a-highly-available-scalable-web-application-582a9085a46a
 
 
 
