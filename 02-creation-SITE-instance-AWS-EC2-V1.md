@@ -228,6 +228,12 @@ sudo systemctl restart httpd
 EOF
 
 echo "Setup complete. You can now access your instance's web server and PHP files."
+echo "Your public IP address is: $PUBLIC_IP"
+echo "Your private IP address is: $PRIVATE_IP"
+echo "Your public DNS is: $PUBLIC_DNS"
+echo "Your security group is: $SECURITY_GROUP_NAME"
+echo "Your key pair is: $KEY_NAME"
+echo "To access the website, open http://$PUBLIC_IP or http://$PUBLIC_DNS in your browser."
 
 ```
 
