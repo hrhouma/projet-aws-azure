@@ -480,4 +480,51 @@ Je suis arrivé ici :     Login to your AWS account and navigate to the Amazon R
 
 
 
+# Annexe  1 : 
+
+Il existe plusieurs moyens pour voir et créer des diagrammes d'architecture AWS. Voici quelques options populaires :
+
+## **Outils de Création de Diagrammes d'Architecture AWS**
+
+### **1. AWS Workload Discovery**
+AWS propose un outil appelé Workload Discovery sur AWS, qui permet de créer, personnaliser et partager des diagrammes d'architecture détaillés basés sur les données en direct d'AWS. Cet outil simplifie le processus de documentation en fournissant des données et des outils de visualisation au même endroit[7].
+
+### **2. EdrawMax**
+EdrawMax est un logiciel qui offre une plateforme de dessin simple avec des fonctionnalités de glisser-déposer. Il inclut toutes les icônes AWS nécessaires pour créer des diagrammes précis et professionnels. Il est particulièrement utile pour les administrateurs système et les professionnels du réseau[4].
+
+### **3. Visual Paradigm**
+Visual Paradigm propose un outil en ligne pour créer des diagrammes d'architecture AWS. Il fournit un ensemble complet d'icônes AWS et permet de relier ces formes aux formes UML traditionnelles pour une meilleure représentation des idées[6].
+
+### **4. Miro**
+Miro offre des modèles de diagrammes d'architecture AWS qui sont visuellement attrayants et traduisent les meilleures pratiques lors de l'utilisation d'AWS. Cet outil est particulièrement utile pour les équipes qui souhaitent collaborer en temps réel[3].
+
+### **5. Draw.io (ou Diagrams.net)**
+Draw.io est un outil gratuit et populaire pour créer des diagrammes d'architecture AWS. Il est recommandé pour sa simplicité et ses fonctionnalités de calques, qui facilitent la gestion des diagrammes complexes[5].
+
+## **Avantages des Diagrammes d'Architecture AWS**
+
+- **Dépannage et Débogage** : Les diagrammes offrent une vue d'ensemble abstraite de l'application, facilitant ainsi le dépannage et le débogage des problèmes[1].
+- **Économie de Coût** : En visualisant les services AWS utilisés, il est plus facile de suivre et d'optimiser les coûts[1].
+- **Maintenance et Mise à Niveau** : Les diagrammes aident à maintenir les applications et à planifier les mises à niveau et l'ajout de nouvelles fonctionnalités[1].
+- **Sécurité** : Ils permettent d'identifier les parties vulnérables de l'application et d'ajouter les pratiques de cybersécurité nécessaires[1].
+
+## **Exemples de Diagrammes d'Architecture AWS**
+
+- **Schéma de l'Architecture de Déploiement** : Utilisé pour les applications hébergées et déployées sur AWS, aidant les développeurs et les équipes DevOps à comprendre et maintenir l'application[1].
+- **Diagramme de Microsoft Active Directory géré par AWS** : Utilisé pour des cas d'utilisation spécifiques comme l'authentification des utilisateurs et la sécurité de l'accès au domaine[1].
+- **Schéma de Construction du Cloud AWS** : Concerne les applications entièrement déployées sur le cloud AWS, incluant les serveurs back-end, les bases de données, le stockage, etc.[1].
+
+En utilisant ces outils et en suivant les meilleures pratiques, vous pouvez créer des diagrammes d'architecture AWS efficaces qui faciliteront la gestion et l'optimisation de vos infrastructures cloud.
+
+# Citations:
+
+[1] https://www.edrawsoft.com/fr/article/aws-architecture-diagram.html
+[2] https://aws.amazon.com/fr/architecture/
+[3] https://miro.com/fr/modeles/diagramme-architecture-aws/
+[4] https://www.edrawsoft.com/fr/aws-diagram-software.html
+[5] https://www.reddit.com/r/aws/comments/16hxlub/creating_aws_architecture_diagram/?tl=fr
+[6] https://online.visual-paradigm.com/fr/diagrams/features/aws-architecture-diagram-tool/
+[7] https://aws.amazon.com/fr/what-is/architecture-diagramming/
+[8] https://www.reddit.com/r/aws/comments/y18dhi/aws_architecture_diagram_tool_recommendations/?tl=fr
+
 
