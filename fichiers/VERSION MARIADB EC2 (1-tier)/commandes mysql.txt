@@ -1,0 +1,16 @@
+# apt-get install mysql-server 
+# mysql
+# mysql> CREATE USER 'eleve'@'localhost' IDENTIFIED BY 'eleve';
+# mysql> GRANT ALL PRIVILEGES ON *.* TO 'eleve'@'localhost' WITH GRANT OPTION;
+# mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'eleve';
+# mysql> FLUSH PRIVILEGES; 
+# mysql> \! Clear;
+# mysql> DESCRIBE mysql.user; 
+# mysql> SELECT User, Host FROM mysql.user;
+# mysql> SELECT user, authentication_string, plugin, host FROM mysql.user;
+# mysql> exit;
+# mysql> FLUSH PRIVILEGES;
+# mysql> exit
+# mysql -u root –p (sans espace après le p)
+
+UTILISEZ LE MOT DE PASSE ELEVE

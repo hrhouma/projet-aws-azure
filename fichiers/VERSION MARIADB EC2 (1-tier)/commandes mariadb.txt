@@ -1,0 +1,25 @@
+=====> VERSION MARIADB SUR AMAZON LINUX 2023 <===
+
+#mysql
+
+MariaDB [(none)]>CREATE USER 'eleve'@'localhost' IDENTIFIED BY 'eleve';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'eleve'@'localhost' WITH GRANT OPTION;
+MariaDB [(none)]> ALTER USER 'root'@'localhost' IDENTIFIED BY 'eleve';
+MariaDB [(none)]> FLUSH PRIVILEGES;
+MariaDB [(none)]> DESCRIBE mysql.user;
+MariaDB [(none)]> SELECT User, Host FROM mysql.user;
+MariaDB [(none)]> SELECT user, authentication_string, plugin, host FROM mysql.user;
+MariaDB [(none)]> FLUSH PRIVILEGES;
+MariaDB [(none)]> show databases;
+MariaDB [(none)]> create database employee;
+MariaDB [(none)]> use employee;
+MariaDB [(employee)]> create table emp_info(emp_id int(11),emp_name varchar(50),emp_username varchar(50),emp_password varchar(50),emp_email varchar(50),emp_phone bigint(20));
+MariaDB [(employee)]> show tables;
+MariaDB [(none)]> exit
+
+
+#mysql -u root –p (mot de passe eleve)
+MariaDB [(none)]> show databases;
+MariaDB [(none)]> use employee;
+MariaDB [(employee)]> show tables;
+MariaDB [(none)]> select * from emp_info;
