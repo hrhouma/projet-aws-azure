@@ -86,6 +86,12 @@ source ~/.bash_profile
 
 ## Résultat Attendu
 
+- Écrire :
+  
+```sh
+bash
+```
+
 Chaque fois que vous ouvrez un nouveau terminal, vous devriez voir le message suivant :
 
 ```
