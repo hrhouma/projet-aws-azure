@@ -298,6 +298,102 @@ Il est important de noter qu'un VPC peut avoir plusieurs tables de routage, mais
 ![image](https://github.com/user-attachments/assets/b1d3c2f7-2b79-455e-b505-662a635b0113)
 
 
+### Création et Configuration d'une Table de Routage Privée
+
+1. Cliquez sur le bouton **Créer une table de routage**.
+2. Dans le champ **Tag de nom**, entrez un nom descriptif pour votre table de routage (par exemple, "Table de routage privée").
+3. Dans le menu déroulant **VPC**, sélectionnez le VPC que nous avons créé.
+4. Cliquez sur le bouton **Créer** pour créer la table de routage.
+
+![image](https://github.com/user-attachments/assets/7f6edcdb-3076-40c5-99ab-d0952b9e4786)
+
+![image](https://github.com/user-attachments/assets/28ae0652-f2d3-4343-82a7-372265151c43)
+
+
+
+
+### Étape 4 : Associer des Sous-réseaux à la Table de Routage
+
+1. Dans le tableau de bord **Tables de routage**, localisez la table de routage privée nouvellement créée.
+2. Cliquez sur le bouton **Actions** et sélectionnez **Modifier les associations de sous-réseaux**.
+3. Dans la section **Associations de sous-réseaux**, cliquez sur le bouton **Ajouter un sous-réseau**.
+4. Sélectionnez les sous-réseaux privés que vous souhaitez associer à la table de routage privée.
+5. Cliquez sur le bouton **Enregistrer** pour associer les sous-réseaux à la table de routage.
+
+![image](https://github.com/user-attachments/assets/0401f723-65f9-42ff-83cb-317e98eea555)
+
+![image](https://github.com/user-attachments/assets/c964f3a6-8d20-4720-9636-dd969d797287)
+
+![image](https://github.com/user-attachments/assets/1312eb73-b6f5-4a54-b0e2-23b5cf5c0459)
+
+
+
+### Remarques Importantes pour les Sous-réseaux Privés
+
+- Les sous-réseaux privés n'ont pas d'attribution automatique d'IPv4 publique.
+- La table de routage ne doit pas inclure de route vers la passerelle Internet, ce qui signifie que l'accès à Internet n'est pas possible. Seul le trafic local dans le réseau VPC, qui est isolé logiquement, est autorisé.
+
+Dans le champ **Destination**, entrez le bloc CIDR pour le trafic réseau que vous souhaitez router (par exemple, `10.0.0.0/16`). Le réseau se déplacera uniquement en interne dans le bloc CIDR du réseau VPC.
+
+
+### Création d'une instance EC2 pour notre application web
+
+1. Cliquez sur **"Launch Instance"** pour démarrer le processus de création d'instance.
+
+![image](https://github.com/user-attachments/assets/4fd1249d-b80b-4784-bd0e-1b50adf7f422)
+
+2. Dans la section **Application and OS Images**, sous **Quick Start**, choisissez **Ubuntu**.
+
+![image](https://github.com/user-attachments/assets/64834f85-9c9f-4d14-bf32-231d0299b834)
+
+3. Sélectionnez le type d'instance souhaité et cliquez sur **"Next: Configure Instance Details"**. Utilisez `t2.micro` pour le niveau gratuit (juste pour la preuve de concept, pour un site de production, le type d'instance sera augmenté en fonction des spécifications des besoins de l'entreprise).
+4. Dans la section **Key pair**, pour **Key pair name**, choisissez `vockey`.
+5. Dans la section **Network settings**, configurez les éléments suivants :
+   - Choisissez **Edit**.
+   - **VPC** : Choisissez le VPC que nous avons créé.
+   - **Auto-assign public IP** : Choisissez **Enable**.
+   
+   **Remarque :** Cela permet à l'instance d'avoir une adresse IP publique attribuée automatiquement. Cela permettra à l'instance de communiquer sur Internet.
+
+6. **Firewall (security groups)** : Choisissez **Create security group**.
+   - **Nom du groupe de sécurité** : Entrez le nom du groupe de sécurité souhaité.
+   - Choisissez **Add security group rule**.
+   - Gardez la règle SSH existante et ajoutez deux nouvelles règles avec les paramètres suivants :
+     - **Nouvelle règle 1** : Pour **Type**, choisissez **HTTP**. Pour **Source type**, choisissez **Anywhere**. 
+       **Remarque :** Cette règle permet le trafic depuis un navigateur web.
+     - **Nouvelle règle 2** : Pour **Type**, choisissez **MYSQL/Aurora**. Pour **Source**, entrez `10.0.0.0/16`.
+       **Remarque :** Cette règle permet d'exporter des données depuis la base de données lors d'une tâche ultérieure.
+
+7. Dans la page **Advanced details**, vous pouvez également spécifier un profil d'instance IAM si vous souhaitez que l'instance communique avec AWS Secrets Manager ou tout autre service AWS. Cela permet à l'instance d'avoir les autorisations nécessaires pour accéder aux secrets de manière sécurisée.
+
+8. Enfin, vous pouvez fournir des **données utilisateur** sur la page **Configure Instance Details**. Les données utilisateur sont un script qui s'exécute sur l'instance pendant le processus de démarrage. Vous pouvez spécifier les étapes nécessaires à effectuer après le lancement de l'instance.
+
+```bash
+#!/bin/bash -xe
+apt update -y
+apt install nodejs unzip wget npm mysql-client -y
+#wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-200-ACCAP1-1-DEV/code.zip -P /home/ubuntu
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-200-ACCAP1-1-79581/1-lab-capstone-project-1/code.zip -P /home/ubuntu
+cd /home/ubuntu
+unzip code.zip -x "resources/codebase_partner/node_modules/*"
+cd resources/codebase_partner
+npm install aws aws-sdk
+export APP_PORT=80
+npm start &
+echo '#!/bin/bash -xe
+cd /home/ubuntu/resources/codebase_partner
+export APP_PORT=80
+npm start' > /etc/rc.local
+chmod +x /etc/rc.local
+```
+
+9. Vérifiez toutes les configurations et cliquez sur **"Launch"** pour créer l'instance EC2.
+
+**Important :** Vérifiez la mise en forme du script après l'avoir copié dans le champ des données utilisateur. Si les lignes de code semblent être coupées.
+
+**Remarque :** Ce script installe Node.js, l'application de gestion des dossiers étudiants (site web, JavaScript, CSS et autres fichiers), et la base de données MySQL sur l'instance EC2.
+
+**Important :** Avant de passer à la tâche suivante, confirmez que l'instance est en état **Running** et que la colonne **Status check** indique "2/2 checks passed." Cela prendra quelques minutes.
 
 
 
