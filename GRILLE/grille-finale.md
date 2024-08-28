@@ -20,7 +20,7 @@ Ce projet met l'accent sur l'application pratique des concepts de base du cloud,
 | **Critères**                                           | **Poids** | **Évaluation (1-5)** | **Commentaires**                                                                                                                                               |
 |--------------------------------------------------------|-----------|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **1. Hébergement du site web**                         |           |                      |                                                                                   |
-| - Choix du site web (pertinence et complexité)         | 10%       |                      | Le site choisi est-il pertinent par rapport aux objectifs du projet ? La complexité est-elle adéquate pour démontrer les compétences techniques ?               |
+| - Choix du site web (pertinence et complexité)         | 5%       |                      | Le site choisi est-il pertinent par rapport aux objectifs du projet ? La complexité est-elle adéquate pour démontrer les compétences techniques ?               |
 | - Configuration du serveur sur la plateforme cloud     | 30%       |                      | Le serveur virtuel a-t-il été configuré correctement ? Les choix techniques sont-ils justifiés ?                                                                 |
 | **2. Mise en place du Load Balancer**                  |           |                      |                                                                                   |
 | - Configuration du Load Balancer                       | 5%       |                      | Le Load Balancer est-il bien configuré pour répartir le trafic ? Y a-t-il des explications claires sur les décisions prises ?                                      |
@@ -34,7 +34,7 @@ Ce projet met l'accent sur l'application pratique des concepts de base du cloud,
 | - Configuration de l'Auto Scaling Group               | 5%        |                      | L'Auto Scaling Group est-il correctement configuré pour répondre aux variations de trafic ?                                                                    |
 | - Test de montée en charge                             | 5%        |                      | Les tests montrent-ils l'efficacité de l'Auto Scaling Group ? Les résultats sont-ils bien documentés ?                                                          |
 | **6. Satisfaction et opportunités d'apprentissage**    |           |                      |                                                                                   |
-| - Compréhension des concepts cloud                     | 10%       |                      | Le projet montre-t-il une bonne compréhension des concepts de base du cloud, comme le load balancing et l'auto scaling ?                                        |
+| - Compréhension des concepts cloud                     | 5%       |                      | Le projet montre-t-il une bonne compréhension des concepts de base du cloud, comme le load balancing et l'auto scaling ?                                        |
 
 ### **Total :** \_\_\_\_\_ / 100%
 
